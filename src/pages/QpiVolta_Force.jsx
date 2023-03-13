@@ -18,8 +18,8 @@ const QpiVolta_Force = () => {
         m="10px 0">
         <Header title="QpiVolta Force" subtitle="Welcome to QpiVolta Force"/>
       </Box>
-      <Grid container spacing={2}>
-        <Grid item="2">
+      <Grid width="450px" container spacing={2}>
+        <Grid item="1">
           <MolCard avatar="A" title="Neural Network" subtitle="Accelerate Density Functional Theory Calculations with Neural Network"   />
         </Grid>
         <Grid item="2">

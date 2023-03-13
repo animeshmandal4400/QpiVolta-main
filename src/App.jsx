@@ -9,6 +9,9 @@ import Home from "./pages/Home";
 import { MyProSidebarProvider } from "./components/Sidebar/SidebarContext";
 import QpiVolta_Gen from "./pages/QpiVolta_Gen";
 import QpiVolta_Force from "./pages/QpiVolta_Force";
+import Molecule from "./components/Molecule3d";
+import QpiVolta_reax from "./pages/QpiVolta_reax";
+import { AuthContextProvider } from "./context/AuthContext";
 
 
 const App = () => {
@@ -19,6 +22,7 @@ const App = () => {
     <ColorModeContext.Provider value={colorMode}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
+        <AuthContextProvider>
         <Routes>
           <Route path="/signup" element={<SignUp />} />
           <Route path="/login" element={<Login />} />
@@ -35,8 +39,10 @@ const App = () => {
             <Route path="/" element={<Home />} />
             <Route path="/qpiVoltaGen" element={<QpiVolta_Gen />} />
             <Route path="/qpiVoltaForce" element={<QpiVolta_Force/>} />
+            <Route path="/qpiVoltareax" element={<QpiVolta_reax pdb="1crn.pdb"/>} />
           </Route>
         </Routes>
+        </AuthContextProvider>
       </ThemeProvider>
     </ColorModeContext.Provider>    
   )
