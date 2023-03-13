@@ -4,10 +4,14 @@ import React from 'react'
 import Header from '../components/Header';
 import { tokens } from '../theme';
 import MolCard from "../components/GenCard"
+import { DropzoneArea } from 'material-ui-dropzone';
+
 const QpiVolta_Gen = () => {
+
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const smScreen =useMediaQuery(theme.breakpoints.up("sm"));
+  
   return (
     <Box p="20px" >
       <Box display={smScreen ? "flex" : "block"}
@@ -24,6 +28,9 @@ const QpiVolta_Gen = () => {
         <Grid item="2">
           <MolCard avatar="B" title="Hybrid Neural Network MD" subtitle="Hybrid workflow for accelerating Molecular Dynamics"  button="Launch" />
         </Grid>
+      </Grid>
+      <Grid container spacing={2}>
+        <DropzoneArea/>
       </Grid>
     </Box>
   )
