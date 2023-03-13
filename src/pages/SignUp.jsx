@@ -1,75 +1,75 @@
-import React,{useContext} from 'react';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-import Link from '@mui/material/Link';
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import MailOutlineIcon from '@mui/icons-material/MailOutline';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
+import React,{useState} from 'react';
+import {Button, TextField,Link,Grid,Box, Typography, Container } from '@mui/material';
 import { styled } from '@mui/material';
 import Logo from '../assets/QpiVolta-Logo.png'
-import BG from "../assets/BG.jpg"
-import { useTheme } from '@mui/material';
+import { useTheme,IconButton } from '@mui/material';
 import { tokens } from '../theme';
-import {Person,Lock, Mail} from '@mui/icons-material';
-const SignUp = () => {
-  const theme = useTheme();
-  const colors = tokens(theme.palette.mode);
-  
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        const data = new FormData(event.currentTarget);
-        console.log({
-          email: data.get('email'),
-          password: data.get('password'),
-        });
-    }
+import {Person,Lock, Mail, Visibility, VisibilityOff} from '@mui/icons-material';
+import { useNavigate } from 'react-router-dom';
+import { UserAuth } from '../context/AuthContext';
+
     const RootStyle = styled("div")({
-        backgroundColor:"#d4cbf6",
-        background:`${colors.primary[400]} !important`,
         height: "100vh",
         display: "flex",
         placeItems: "center",
     });
     const logoStyle = {
       height: '80px',
-      
     };
-    /* const styles = {
-      label: {
-        color: '#8eaad9',
-      },
-      input: {
-        border: ' blue',
-      },
-    }; */
 
     const CssTextField = styled(TextField)({
       '& label.Mui-focused': {
-        color: `${colors.pinkAccent[500]}`,
+        color: "#cc2c94",
       },
       '& .MuiInput-underline:after': {
-        borderBottomColor:  `${colors.pinkAccent[500]}`,
+        borderBottomColor:  "#cc2c94",
       },
       '& .MuiOutlinedInput-root': {
         '& fieldset': {
           borderColor: 'grey',
         },
         '&:hover fieldset': {
-          borderColor: `${colors.pinkAccent[500]}`,
+          borderColor: "#cc2c94",
         },
         '&.Mui-focused fieldset': {
-          borderColor: `${colors.pinkAccent[500]}`,
+          borderColor: "#cc2c94",
         },
       },
     });
+
+const SignUp = () => {
+  const theme = useTheme();
+  const colors = tokens(theme.palette.mode);
+  
+  const [showPassword, setShowPassword] = useState(false);
+  const handleClickShowPassword = () => setShowPassword(!showPassword);
+
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };
+
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+  const [firstName,setFirstname] = useState("")
+  const [lastName,setLastname] = useState("")
+  const [error, setError] = useState()
+  const {signUp} = UserAuth()
+  const navigate = useNavigate()
+  const handleSubmit= async(e) => {
+    e.preventDefault()
+    try {
+      await signUp(email,password, firstName, lastName)
+      navigate('/') 
+      setError('')
+    }
+    catch (error) {
+      console.log(error)
+      setError("Error: "+error.code);
+    }
+  }
+
     return (
-      <RootStyle>
+      <RootStyle sx={{bgcolor:`${colors.primary[400]}`}}>
         <Container  maxWidth="sm" >
         <Box
           sx={{
@@ -78,38 +78,42 @@ const SignUp = () => {
             flexDirection: 'column',
             alignItems: 'center',            
           }}
-        >
-          
+        >   
           <img component="img" src={Logo} style={logoStyle}  />
           <Typography component="h1" variant="h2" color={colors.grey[100]} >
             Create an account<span style={{ color:`${colors.pinkAccent[500]}`}}>.</span>
           </Typography>
-          <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 2 , mb:2}}>
+          {error ? <Typography bgcolor={colors.red[100]} sx={{ mt:"15px" ,p:"5px", borderRadius:"5px" ,color:"white", textAlign:"center"}}>{error}</Typography>: null}
+
+          <Box component="form" onSubmit={handleSubmit} sx={{ mt: 2 , mb:2}}>
             <Grid container spacing={3} >
               <Grid item xs={12} sm={6} >
               <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
               <Person sx={{ color: 'action.active', mr: 1, my: 0.5 }} />
               <CssTextField
-                  required
                   fullWidth
                   label="First Name" 
                   id="FirstName"
                   name="FirstName"
                   autoComplete="family-name"
-                  variant='standard' />
+                  variant='standard'
+                  onChange={(e)=> setFirstname(e.target.value)}
+              />
                   </Box>
               </Grid>
               <Grid item xs={12} sm={6}>
               <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
               <Person sx={{ color: 'action.active', mr: 1, my: 0.5 }} />
                 <CssTextField
-                  required
                   fullWidth
                   id="lastName"
                   label="Last Name"
                   name="lastName"
                   autoComplete="family-name"
                   variant='standard' 
+                  onChange={(e) => {
+                      setLastname(e.target.value);
+                  }}
                 />
                 </Box>
               </Grid>
@@ -124,6 +128,9 @@ const SignUp = () => {
                   name="email"
                   autoComplete="email"
                   variant='standard' 
+                  onChange={(e) => {
+                    setEmail(e.target.value);
+                  }}
                 />
                 </Box>
               </Grid>
@@ -131,14 +138,26 @@ const SignUp = () => {
               <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
               <Lock sx={{ color: 'action.active', mr: 1, my: 0.5 }} />
                 <CssTextField
-                  required
-                  fullWidth
-                  name="password"
-                  label="Password"
-                  type="password"
-                  id="password"
-                  autoComplete="new-password"
-                  variant='standard' 
+                   required
+                   fullWidth
+                   name="password"
+                   label="Password"
+                   id="password"
+                   autoComplete="new-password"
+                   type={showPassword ? 'text' : 'password'}
+                   variant='standard'
+                   onChange={(e) => setPassword(e.target.value)}
+                   InputProps={{
+                     endAdornment: (
+                      <IconButton
+                        aria-label="toggle password visibility"
+                        onClick={handleClickShowPassword}
+                        onMouseDown={handleMouseDownPassword}
+                      >
+                        {showPassword ? <Visibility /> : <VisibilityOff />}
+                      </IconButton>
+                     ),
+                   }}
                 />
                 </Box>
               </Grid>

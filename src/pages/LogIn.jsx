@@ -1,60 +1,86 @@
-import React from 'react'
-import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
-import Link from '@mui/material/Link';
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
-import { styled } from '@mui/material';
+import React, { useState } from 'react'
+import {Button, TextField,Link,Grid,Box, Typography, Container } from '@mui/material';
+import { IconButton, styled } from '@mui/material';
 import Logo from '../assets/QpiVolta-Logo.png';
 import { tokens } from '../theme';
 import { useTheme } from '@emotion/react';
-import {Lock, Email} from '@mui/icons-material';
+import {Lock, Email, Visibility, VisibilityOff} from '@mui/icons-material';
+import { UserAuth } from '../context/AuthContext';
+import { useNavigate } from 'react-router-dom';
 
-const Login = () => {
-  const theme = useTheme();
-  const colors = tokens(theme.palette.mode);
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
-}
 const RootStyle = styled("div")({
-  background:`${colors.primary[400]} !important`,
   height: "100vh",
   display: "flex",
   placeItems: "center",
 });
 const logoStyle = {
-  height: '80px',
-  
+height: '80px',
 };
+
 const CssTextField = styled(TextField)({
-  '& label.Mui-focused': {
-    color: `${colors.pinkAccent[500]}`,
+'& label.Mui-focused': {
+  color: "#cc2c94",
+},
+'& .MuiInput-underline:after': {
+  borderBottomColor:  "#cc2c94",
+},
+'& .MuiOutlinedInput-root': {
+  '& fieldset': {
+    borderColor: 'grey',
   },
-  '& .MuiInput-underline:after': {
-    borderBottomColor:  `${colors.pinkAccent[500]}`,
+  '&:hover fieldset': {
+    borderColor: "#cc2c94",
   },
-  '& .MuiOutlinedInput-root': {
-    '& fieldset': {
-      borderColor: 'grey',
-    },
-    '&:hover fieldset': {
-      borderColor: `${colors.pinkAccent[500]}`,
-    },
-    '&.Mui-focused fieldset': {
-      borderColor: `${colors.pinkAccent[500]}`,
-    },
+  '&.Mui-focused fieldset': {
+    borderColor: "#cc2c94",
   },
+},
 });
+
+
+const Login = () => {
+  const theme = useTheme();
+  const colors = tokens(theme.palette.mode);
+  const [showPassword, setShowPassword] = useState("")
+  const handleClickShowPassword = () => {
+    setShowPassword(!showPassword);
+  }
+   const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };
+  
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+  const [error, setError] = useState()
+  const {logIn,passReset} = UserAuth()
+  const navigate = useNavigate()
+  const handleSubmit = async(e) => {
+    e.preventDefault()
+    setError('')
+    try {
+      await logIn(email,password)
+      alert("Login Successfully")
+      navigate('/')
+    }
+    catch(error) {
+      console.log(error);
+      setError("Error: "+error.code);
+    }
+  }
+  const forgetPass = async(e) => {
+    e.preventDefault();
+    setError('');
+    try {
+      await passReset(email);
+      alert('Password reset email sent. Please check your inbox.');
+    } catch(error) {
+      console.log(error);
+      setError('Error: ' + error.code);
+    }
+  }
+
   return (
-    <RootStyle>
+    <RootStyle sx={{bgcolor:`${colors.primary[400]}`}}>
         <Container maxWidth="sm" >
         <Box 
           sx={{
@@ -66,11 +92,11 @@ const CssTextField = styled(TextField)({
         > 
           <img component="img" src={Logo} style={logoStyle}  />
           <Typography component="h1" variant="h3" color={colors.grey[100]}>
-            Login to your Account.
+            Login to your Account<span style={{ color:`${colors.pinkAccent[500]}`}}>.</span>
           </Typography>
-          <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 2 , mb:2}}>
+          {error ? <Typography bgcolor={colors.red[100]} sx={{ mt:"15px" ,p:"5px", borderRadius:"5px" ,color:"white", textAlign:"center"}}>{error}</Typography>: null}
+          <Box component="form" onSubmit={handleSubmit} sx={{ mt: 2 , mb:2}}>
             <Grid container spacing={3} >
- 
               <Grid item xs={12}>
               <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
               <Email sx={{ color: 'action.active', mr: 1, my: 0.5 }} />
@@ -82,6 +108,7 @@ const CssTextField = styled(TextField)({
                   name="email"
                   autoComplete="email"
                   variant='standard'
+                  onChange={(e) => setEmail(e.target.value)}
                 />
                 </Box>
               </Grid>
@@ -93,10 +120,21 @@ const CssTextField = styled(TextField)({
                   fullWidth
                   name="password"
                   label="Password"
-                  type="password"
+                  type={ showPassword ? "text" :"password" }
                   id="password"
                   autoComplete="new-password"
                   variant='standard'
+                  InputProps={{
+                    endAdornment : (
+                      <IconButton
+                      onClick={handleClickShowPassword}
+                      onMouseDown={handleMouseDownPassword}
+                      >
+                          {showPassword? <Visibility/>: <VisibilityOff/>}
+                      </IconButton>
+                    )
+                  }}
+                  onChange={(e) => setPassword(e.target.value)}
                 />
                 </Box>
               </Grid>
@@ -109,10 +147,15 @@ const CssTextField = styled(TextField)({
             >
               Sign Up
             </Button>
-            <Grid container justifyContent="flex-end">
+            <Grid container justifyContent="space-between">
               <Grid item>
-                <Link href="/" variant="body2" sx={{color:"grey"}}>
+                <Link href="/SignUp" variant="body2" sx={{color:"grey"}}>
                   Don't have an account? Sign UP
+                </Link>
+              </Grid>
+              <Grid item>
+                <Link href="#" variant="body2" sx={{color:"grey"}} onClick={forgetPass}>
+                  Forgot password?
                 </Link>
               </Grid>
             </Grid>
@@ -122,5 +165,4 @@ const CssTextField = styled(TextField)({
       </RootStyle> 
   )
 }
-
 export default Login

@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Menu, Sidebar, MenuItem } from "react-pro-sidebar";
 import { useProSidebar } from "react-pro-sidebar";
-
 import { Link, NavLink } from "react-router-dom";
 import { tokens } from "../../theme";
 import { useTheme, Box, Typography, IconButton } from "@mui/material";
@@ -39,7 +38,6 @@ const MyProSidebar = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [selected, setSelected] = useState("Home");
-  /* const { sidebarRTL, setSidebarRTL, sidebarImage } = useSidebarContext(); */
   const { collapseSidebar, toggleSidebar, collapsed, broken } = useProSidebar();
   return (
     <Box
@@ -52,6 +50,7 @@ const MyProSidebar = () => {
         zIndex: 10000,
         "& .sidebar": {
           border: "none",
+          width:"10vh",
         },
         "& .menu-icon": {
           backgroundColor: "transparent !important",
@@ -83,15 +82,7 @@ const MyProSidebar = () => {
             icon={
               collapsed ? (
                 <MenuOutlinedIcon onClick={() => collapseSidebar()} />
-              ) :("") /* sidebarRTL ? (
-                <SwitchLeftOutlinedIcon
-                  onClick={() => setSidebarRTL(!sidebarRTL)}
-                />
-              ) : (
-                <SwitchRightOutlinedIcon
-                  onClick={() => setSidebarRTL(!sidebarRTL)}
-                />
-              ) */
+              ) :("") 
             }
             style={{
               margin: "10px 0 20px 0",
@@ -165,7 +156,7 @@ const MyProSidebar = () => {
             />
             <Item
               title="QpiVolta Reax"
-              to="/faq"
+              to="/qpivoltareax"
               icon={<HelpOutlineOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}

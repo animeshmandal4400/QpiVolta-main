@@ -23,7 +23,9 @@ const GenCard = ({avatar,title,subtitle,tags}) => {
     const colors = tokens(theme.palette.mode)
     const smScreen = useMediaQuery(theme.breakpoints.up("sm"));
   return (
-    <Card sx={{ maxWidth: 345 , backgroundColor:`${colors.blueAccent[900]}` }} style={{borderRadius:"10px"}} >
+    <Card sx={{ maxWidth:"345px" ,backgroundColor:`${colors.blueAccent[900]}` }} style={{borderRadius:"10px"}} 
+    
+    >
       <CardHeader
         avatar={
           <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
