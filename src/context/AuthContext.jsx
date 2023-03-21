@@ -29,14 +29,15 @@ function signUp(email, password, firstName, lastName) {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
-  }) 
+  })
+
   return () => {
     unsubscribe();
-  }; 
+  };
   });
   
   return (
-  <AuthContext.Provider value={{signUp,user, logIn, logOut, passReset}}>
+  <AuthContext.Provider value={{signUp, user, logIn, logOut, passReset}}>
     {children}
   </AuthContext.Provider>
     ); 

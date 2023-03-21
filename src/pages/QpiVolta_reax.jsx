@@ -1,22 +1,24 @@
+import { useTheme } from '@emotion/react'
+import { useMediaQuery } from '@mui/material'
+import { Box } from '@mui/system'
 import React from 'react'
-import Molecule from '../components/Molecule3d'
-
-
-const moleculeData = `
-  C1=CC=C(C=C1)C(=O)NC2=NC(=NC=C2N)N
-  C1=CC=C(C=C1)C(=O)NC2=NC(=NC=C2N)N
-  C1=CC=C(C=C1)C(=O)NC2=NC(=NC=C2N)N
-  C1=CC=C(C=C1)C(=O)NC2=NC(=NC=C2N)N
-  C1=CC=C(C=C1)C(=O)NC2=NC(=NC=C2N)N
-  C1=CC=C(C=C1)C(=O)NC2=NC(=NC=C2N)N
-  C1=CC=C(C=C1)C(=O)NC2=NC(=NC=C2N)N
-`;
-
+import Header from '../components/Header'
+import { tokens } from '../theme'
 const QpiVolta_reax = () => {
+  const theme =useTheme();
+  const colors = tokens(theme.palette.mode);
+  const smScreen = useMediaQuery(theme.breakpoints.up("sm"))
   return (
-    <div>
- <Molecule data={moleculeData} />
-     </div>
+    <Box p="20px">
+      <Box display={smScreen ? 'flex' : "block"}
+        flexDirection={smScreen ? "row" : "column"}
+        justifyContent={smScreen ? "space-between" : "start"}
+        alignItems={smScreen ? "center" : "start"}
+        m="10px 0">
+      <Header title="QpiVolta Reax" subtitle="Welcome to QpiVolta Reax"/>
+      </Box>
+
+    </Box>
   )
 }
 

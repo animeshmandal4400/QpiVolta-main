@@ -1,27 +1,24 @@
 import React from 'react'
-import { styled } from '@mui/material/styles';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
 import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
-import Collapse from '@mui/material/Collapse';
 import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import { red } from '@mui/material/colors';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShareIcon from '@mui/icons-material/Share';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
-
-import { Button, Fab, useMediaQuery, useTheme } from '@mui/material'
+import { Button, useTheme } from '@mui/material'
 import { tokens } from '../theme';
 import img from "../assets/molucule.png"
-const GenCard = ({avatar,title, subtitle,tags,button}) => {
+import Chip from '@mui/material/Chip';
+
+const GenCard = ({avatar,title, subtitle,tags,button, link}) => {
     const theme = useTheme();
-    const colors = tokens(theme.palette.mode)
-    const smScreen = useMediaQuery(theme.breakpoints.up("sm"));
+    const colors = tokens(theme.palette.mode);
   return (
     <Card sx={{ maxWidth: 350,backgroundColor:`${colors.blueAccent[900]}` }} style={{borderRadius:"10px"}} >
       <CardHeader
@@ -45,10 +42,11 @@ const GenCard = ({avatar,title, subtitle,tags,button}) => {
         alt="img"
       />
       <CardContent>
-        {/* <Fab variant="extended">
-            {tags}
-        </Fab> */}
-        <Button variant="contained" style={{backgroundColor:`${colors.pinkAccent[500]}`}}>
+        {/* <Chip variant="outlined" label="Orgnic LED"/> */}
+        <Button 
+          variant="contained" 
+          style={{backgroundColor:`${colors.pinkAccent[500]}`}} 
+        >
             {button}
         </Button>
       </CardContent>

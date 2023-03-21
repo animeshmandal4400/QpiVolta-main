@@ -1,10 +1,9 @@
-import { Typography, useTheme, Box, useMediaQuery, Grid  } from '@mui/material'
-import { color } from '@mui/system';
+import { useTheme, Box, useMediaQuery, Grid  } from '@mui/material'
 import React from 'react'
 import Header from '../components/Header';
 import { tokens } from '../theme';
 import MolCard from "../components/GenCard"
-import { DropzoneArea } from 'material-ui-dropzone';
+import FileUploader from '../components/FileUploader';
 
 const QpiVolta_Gen = () => {
 
@@ -21,17 +20,17 @@ const QpiVolta_Gen = () => {
         m="10px 0">
         <Header title="QpiVolta Gen" subtitle="Welcome to QpiVolta Gen"/>
       </Box>
-      <Grid container spacing={2}>
-        <Grid item="2">
-          <MolCard avatar="A" title="Neural Network" subtitle="Accelerate Density Functional Theory Calculations with Neural Network"  button="Launch" />
+      <Grid container gap={2} >
+        <Grid>
+          <MolCard avatar="A" title="QM9 Dataset" subtitle="A comprehensive chemical space of small organic molecules"  button="Generate" />
         </Grid>
-        <Grid item="2">
-          <MolCard avatar="B" title="Hybrid Neural Network MD" subtitle="Hybrid workflow for accelerating Molecular Dynamics"  button="Launch" />
+        <Grid >
+          <MolCard avatar="B" title="QMugs" subtitle="Comprises quantam mechanical proparties of phermacologically relevant molecules"  button="Generate" />
         </Grid>
       </Grid>
-      <Grid container spacing={2}>
-        <DropzoneArea/>
-      </Grid>
+      <Grid container width="max-content" item xs={12} md={6} marginTop="10px">
+        <FileUploader/>
+      </Grid> 
     </Box>
   )
 }

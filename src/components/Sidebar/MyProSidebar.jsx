@@ -14,12 +14,30 @@ import HelpOutlineOutlinedIcon from "@mui/icons-material/HelpOutlineOutlined";
 import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import Logo from '../../assets/Logo.png'
+import { motion } from "framer-motion";
+
+const variants = {
+  open: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      y: { stiffness: 1000, velocity: -100 }
+    }
+  },
+  closed: {
+    y: 50,
+    opacity: 0,
+    transition: {
+      y: { stiffness: 1000 }
+    }
+  }
+};
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
-  return (
+  return ( 
     <MenuItem
       active={selected === title}
       style={{
@@ -56,7 +74,6 @@ const MyProSidebar = () => {
           backgroundColor: "transparent !important",
         },
         "& .menu-item": {
-          //padding: "5px 35px 5px 20px !important",
           backgroundColor: "transparent !important",
         },
         "& .menu-anchor": {
@@ -125,7 +142,9 @@ const MyProSidebar = () => {
               </Box>
             </Box>
           )}
-          <Box paddingLeft={collapsed ? undefined : "10%"}>
+          <Box paddingLeft={collapsed ? undefined : "10%"} 
+          
+              >
             <Item
               title="Home"
               to="/"
@@ -148,7 +167,7 @@ const MyProSidebar = () => {
               setSelected={setSelected}
             />
             <Item
-              title="QpiVOlta Gen"
+              title="QpiVolta Gen"
               to="/qpiVoltaGen"
               icon={<CalendarTodayOutlinedIcon />}
               selected={selected}

@@ -1,5 +1,4 @@
 import React from 'react'
-import { styled } from '@mui/material/styles';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
 import CardMedia from '@mui/material/CardMedia';
@@ -12,20 +11,17 @@ import Typography from '@mui/material/Typography';
 import { red } from '@mui/material/colors';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShareIcon from '@mui/icons-material/Share';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 
 import { Button, Fab, useMediaQuery, useTheme } from '@mui/material'
 import { tokens } from '../theme';
 
-const GenCard = ({avatar,title,subtitle,tags}) => {
+const GenCard = ({avatar,title,subtitle}) => {
     const theme = useTheme();
     const colors = tokens(theme.palette.mode)
     const smScreen = useMediaQuery(theme.breakpoints.up("sm"));
   return (
-    <Card sx={{ maxWidth:"345px" ,backgroundColor:`${colors.blueAccent[900]}` }} style={{borderRadius:"10px"}} 
-    
-    >
+    <Card sx={{ maxWidth:"345px" ,backgroundColor:`${colors.blueAccent[900]}` }} style={{borderRadius:"10px"}} >
       <CardHeader
         avatar={
           <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">

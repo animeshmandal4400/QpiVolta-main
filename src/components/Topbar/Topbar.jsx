@@ -1,7 +1,7 @@
 import React from "react";
 import { useContext } from "react";
 import { ColorModeContext, tokens } from "../../theme";
-import { useTheme, Box, IconButton, InputBase, Button, Menu, MenuItem } from "@mui/material";
+import { useTheme, Box, IconButton, Menu, MenuItem } from "@mui/material";
 import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
 import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
 import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
@@ -15,7 +15,7 @@ const Topbar = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const colorMode = useContext(ColorModeContext);
-  const { toggleSidebar, broken, rtl } = useProSidebar();
+  const { toggleSidebar, broken } = useProSidebar();
   const  {user,logOut} = UserAuth();
   const navigate = useNavigate();
 
@@ -38,7 +38,7 @@ const Topbar = () => {
   }
 
   return (
-    <Box display="flex" justifyContent="space-between" p={2} backgroundColor={colors.blueAccent[900]}>
+    <Box display="flex" justifyContent="space-between" p={2} backgroundColor={colors.blueAccent[900]} >
       <Box display="flex">
         {broken && (
           <IconButton
@@ -76,13 +76,12 @@ const Topbar = () => {
         open={Boolean(anchorEl)}
         onClose={handleClose}
         MenuListProps={{ onMouseLeave: handleClose }}
-      >
-        <MenuItem onClick={handleClose}>{user && user.displayName ? "Hi! " + user.displayName.split(" ")[0] :"Profile"}</MenuItem>
-        {/* <MenuItem onClick={handleClose}>My account</MenuItem> */}
-        {user?<MenuItem onClick={handleLogout}>Logout</MenuItem>:
-        <Link to="/login"><MenuItem onClick={handleLogout} style={{color:"white", textAlign:"center", textDecoration:"none" }}> LogIn</MenuItem></Link>
-        }
-       
+      >        
+        <MenuItem onClick={handleClose}>{user && user.displayName ? `Hi! `+ user.displayName.split(" ")[0] : "Profile"}</MenuItem>
+        <MenuItem onClick={handleClose}>My account</MenuItem>
+        { user? <MenuItem onClick={handleLogout}>Logout</MenuItem>:
+        < Link to="/login"><MenuItem onClick={handleLogout} style={{color:"white", textAlign:"center", textDecoration:"none" }}> LogIn</MenuItem></Link>
+        }        
       </Menu>
       </Box>
     </Box>
