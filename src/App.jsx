@@ -9,7 +9,6 @@ import Home from "./pages/Home";
 import { MyProSidebarProvider } from "./components/Sidebar/SidebarContext";
 import QpiVolta_Gen from "./pages/QpiVolta_Gen";
 import QpiVolta_Force from "./pages/QpiVolta_Force";
-import Molecule from "./components/Molecule";
 import QpiVolta_reax from "./pages/QpiVolta_reax";
 import { AuthContextProvider } from "./context/AuthContext";
 
@@ -39,7 +38,7 @@ const App = () => {
             <Route path="/" element={<Home />} />
             <Route path="/qpiVoltaGen" element={<QpiVolta_Gen />} />
             <Route path="/qpiVoltaForce" element={<QpiVolta_Force/>} />
-            <Route path="/qpiVoltareax" element={<QpiVolta_reax/>} />
+            <Route path="/qpivoltaReax" element={<QpiVolta_reax/>} />
           </Route>
         </Routes>
         </AuthContextProvider>

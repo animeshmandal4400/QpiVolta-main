@@ -6,7 +6,6 @@ import MolCard from "../components/GenCard"
 import FileUploader from '../components/FileUploader';
 
 const QpiVolta_Gen = () => {
-
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const smScreen =useMediaQuery(theme.breakpoints.up("sm"));

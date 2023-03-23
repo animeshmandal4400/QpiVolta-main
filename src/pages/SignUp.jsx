@@ -7,15 +7,13 @@ import { tokens } from '../theme';
 import {Person,Lock, Mail, Visibility, VisibilityOff} from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
 import { UserAuth } from '../context/AuthContext';
+import { Particle } from '../components/particle';
 
     const RootStyle = styled("div")({
         height: "100vh",
         display: "flex",
         placeItems: "center",
     });
-    const logoStyle = {
-      height: '80px',
-    };
 
     const CssTextField = styled(TextField)({
       '& label.Mui-focused': {
@@ -70,16 +68,16 @@ const SignUp = () => {
 
     return (
       <RootStyle sx={{bgcolor:`${colors.primary[400]}`}}>
+        <Particle/>
         <Container  maxWidth="sm" >
         <Box
           sx={{
-            marginTop: 8,
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',            
           }}
         >   
-          <img component="img" src={Logo} style={logoStyle}  />
+          <img component="img" src={Logo}  style={{height: '85px', marginBottom:"8px"}}   />
           <Typography component="h1" variant="h2" color={colors.grey[100]} >
             Create an account<span style={{ color:`${colors.pinkAccent[500]}`}}>.</span>
           </Typography>

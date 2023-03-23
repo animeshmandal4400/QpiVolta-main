@@ -28,6 +28,7 @@ const Topbar = () => {
   function handleClose() {
     setAnchorEl(null);
   }
+  
   const handleLogout = async() => {
     try {
       await logOut();
@@ -38,7 +39,7 @@ const Topbar = () => {
   }
 
   return (
-    <Box display="flex" justifyContent="space-between" p={2} backgroundColor={colors.blueAccent[900]} >
+    <Box display="flex" zIndex="1" justifyContent="space-between" p={2} backgroundColor={colors.blueAccent[900]} >
       <Box display="flex">
         {broken && (
           <IconButton
@@ -77,10 +78,10 @@ const Topbar = () => {
         onClose={handleClose}
         MenuListProps={{ onMouseLeave: handleClose }}
       >        
-        <MenuItem onClick={handleClose}>{user && user.displayName ? `Hi! `+ user.displayName.split(" ")[0] : "Profile"}</MenuItem>
+        <MenuItem onClick={handleClose}>{user && user.displayName ? `Hi! `+ user.displayName.split(" ")[0] : "User"}</MenuItem>
         <MenuItem onClick={handleClose}>My account</MenuItem>
         { user? <MenuItem onClick={handleLogout}>Logout</MenuItem>:
-        < Link to="/login"><MenuItem onClick={handleLogout} style={{color:"white", textAlign:"center", textDecoration:"none" }}> LogIn</MenuItem></Link>
+        <MenuItem onClick={handleLogout}> LogIn</MenuItem>
         }        
       </Menu>
       </Box>

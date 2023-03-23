@@ -7,15 +7,13 @@ import { useTheme } from '@emotion/react';
 import {Lock, Email, Visibility, VisibilityOff} from '@mui/icons-material';
 import { UserAuth } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
+// import { Particle } from '../components/particle';
 
 const RootStyle = styled("div")({
   height: "100vh",
   display: "flex",
   placeItems: "center",
 });
-const logoStyle = {
-height: '80px',
-};
 
 const CssTextField = styled(TextField)({
 '& label.Mui-focused': {
@@ -58,7 +56,7 @@ const Login = () => {
     e.preventDefault()
     setError('')
     try {
-      await logIn(email,password)
+      await logIn( email,password )
       alert("Login Successfully")
       navigate('/')
     }
@@ -67,6 +65,7 @@ const Login = () => {
       setError("Error: "+error.code);
     }
   }
+
   const forgetPass = async(e) => {
     e.preventDefault();
     setError('');
@@ -81,16 +80,16 @@ const Login = () => {
 
   return (
     <RootStyle sx={{bgcolor:`${colors.primary[400]}`}}>
+      {/* <Particle/> */}
         <Container maxWidth="sm" >
         <Box 
           sx={{
-            marginTop: 8,
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',            
           }}
         > 
-          <img component="img" src={Logo} style={logoStyle}  />
+          <img component="img" src={Logo}  style={{height: '80px', marginBottom:"8px", zIndex:"1"}}   />
           <Typography component="h1" variant="h3" color={colors.grey[100]}>
             Login to your Account<span style={{ color:`${colors.pinkAccent[500]}`}}>.</span>
           </Typography>
