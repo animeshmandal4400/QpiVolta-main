@@ -1,9 +1,11 @@
 import { Button } from '@mui/material';
 import React, { useState } from 'react';
 import { useDropzone } from 'react-dropzone';
+import { useNavigate } from "react-router-dom";
 
 const FileUploader =() => {
   const [selectedFile, setSelectedFile] = useState(null);
+  const history = useNavigate();
 
   function handleDrop(acceptedFiles) {
     setSelectedFile(acceptedFiles[0]);
@@ -11,6 +13,15 @@ const FileUploader =() => {
 
   function handleSubmit(event) { 
     event.preventDefault();
+    if(selectedFile) {
+      const reader = new FileReader();
+      reader.readAsText(selectedFile);
+      reader.onload = function(e) {
+        const fileContent = e.target.result;
+        localStorage.setItem("model", fileContent);
+        history("/Genmol");
+      }
+    }
   }
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop:handleDrop });

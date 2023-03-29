@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Menu, Sidebar, MenuItem } from "react-pro-sidebar";
 import { useProSidebar } from "react-pro-sidebar";
-import { Link, NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { tokens } from "../../theme";
 import { useTheme, Box, Typography, IconButton } from "@mui/material";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
@@ -13,25 +13,9 @@ import CalendarTodayOutlinedIcon from "@mui/icons-material/CalendarTodayOutlined
 import HelpOutlineOutlinedIcon from "@mui/icons-material/HelpOutlineOutlined";
 import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
+import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
 import Logo from '../../assets/Logo.png'
-import { motion } from "framer-motion";
 
-const variants = {
-  open: {
-    y: 0,
-    opacity: 1,
-    transition: {
-      y: { stiffness: 1000, velocity: -100 }
-    }
-  },
-  closed: {
-    y: 50,
-    opacity: 0,
-    transition: {
-      y: { stiffness: 1000 }
-    }
-  }
-};
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
@@ -113,10 +97,6 @@ const MyProSidebar = () => {
                 alignItems="center"
                 ml="15px"
               >
-                
-                 {/* <Typography variant="h3" color={colors.grey[100]}>
-                  Menus
-                </Typography>  */}
                 <IconButton
                   onClick={
                     broken ? () => toggleSidebar() : () => collapseSidebar()
@@ -162,21 +142,21 @@ const MyProSidebar = () => {
             <Item
               title="QpiVolta Force"
               to="/qpiVoltaForce"
-              icon={<PersonOutlinedIcon />}
+              icon={<FormatListBulletedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
             <Item
               title="QpiVolta Gen"
               to="/qpiVoltaGen"
-              icon={<CalendarTodayOutlinedIcon />}
+              icon={<FormatListBulletedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
             <Item
               title="QpiVolta Reax"
               to="/qpivoltareax"
-              icon={<HelpOutlineOutlinedIcon />}
+              icon={<FormatListBulletedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
@@ -189,23 +169,23 @@ const MyProSidebar = () => {
               Data
             </Typography>
             <Item
-              title="Data1"
-              to="/team"
-              icon={<PeopleOutlinedIcon />}
+              title="Work Flows"
+              to="/workFlows"
+              icon={<FormatListBulletedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
             <Item
               title="Data2"
               to="/contacts"
-              icon={<ContactsOutlinedIcon />}
+              icon={<FormatListBulletedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
             <Item
               title="Data3"
               to="/invoices"
-              icon={<ReceiptOutlinedIcon />}
+              icon={<FormatListBulletedIcon />}
               selected={selected}
               setSelected={setSelected}
             />

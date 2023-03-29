@@ -13,10 +13,8 @@ import ShareIcon from '@mui/icons-material/Share';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { Button, useTheme } from '@mui/material'
 import { tokens } from '../theme';
-import img from "../assets/molucule.png"
-import Chip from '@mui/material/Chip';
 
-const GenCard = ({avatar,title, subtitle,tags,button, link}) => {
+const GenCard = (props) => {
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
   return (
@@ -24,7 +22,7 @@ const GenCard = ({avatar,title, subtitle,tags,button, link}) => {
       <CardHeader
         avatar={
           <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-            {avatar}
+            {props.avatar}
           </Avatar>
         }
         action={
@@ -32,22 +30,25 @@ const GenCard = ({avatar,title, subtitle,tags,button, link}) => {
             <MoreVertIcon />
           </IconButton>
         }
-        title={title}
-        subheader={subtitle}
+        title={props.title}
+        subheader={props.subtitle}
       />
-      <CardMedia
-        component="img"
-        height="100"
-        image={img}
-        alt="img"
-      />
+      {props.image && (
+        <CardMedia
+          component="img"
+          height="100"
+          image={props.image}
+          alt="img"
+        />
+      )}
       <CardContent>
         {/* <Chip variant="outlined" label="Orgnic LED"/> */}
         <Button 
+        onClick={props.onClick}
           variant="contained" 
           style={{backgroundColor:`${colors.pinkAccent[500]}`}} 
         >
-            {button}
+            {props.button}
         </Button>
       </CardContent>
       <CardActions disableSpacing>

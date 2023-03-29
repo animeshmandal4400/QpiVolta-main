@@ -1,6 +1,7 @@
 import React, { createContext, useContext } from "react";
 import { ProSidebarProvider } from "react-pro-sidebar";
-import MyProSidebar from "./MyProSidebar";
+import MyProSidebar from "../components/Sidebar/LeftSidebar";
+import RightSidebar from "../components/Sidebar/RightSidebar";
 
 const SidebarContext = createContext({});
 
@@ -14,9 +15,9 @@ export const MyProSidebarProvider = ({ children }) => {
           }}
         >
           <MyProSidebar />
+          <RightSidebar/>
           {children}
         </div>
-      {/* </SidebarContext.Provider> */}
     </ProSidebarProvider>
   );
 };

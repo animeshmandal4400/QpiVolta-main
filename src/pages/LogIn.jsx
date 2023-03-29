@@ -7,7 +7,7 @@ import { useTheme } from '@emotion/react';
 import {Lock, Email, Visibility, VisibilityOff} from '@mui/icons-material';
 import { UserAuth } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
-// import { Particle } from '../components/particle';
+import { Particle } from '../components/particle';
 
 const RootStyle = styled("div")({
   height: "100vh",
@@ -80,7 +80,7 @@ const Login = () => {
 
   return (
     <RootStyle sx={{bgcolor:`${colors.primary[400]}`}}>
-      {/* <Particle/> */}
+      <Particle/>
         <Container maxWidth="sm" >
         <Box 
           sx={{

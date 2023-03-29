@@ -4,22 +4,13 @@ import { loadFull } from "tsparticles";
 
 export const Particle = () => {
     const particlesInit = useCallback(async engine => {
-        console.log(engine);
-        // you can initiate the tsParticles instance (engine) here, adding custom shapes or presets
-        // this loads the tsparticles package bundle, it's the easiest method for getting everything ready
-        // starting from v2 you can add only the features you need reducing the bundle size
         await loadFull(engine);
-    }, []);
-
-    const particlesLoaded = useCallback(async container => {
-        await console.log(container);
     }, []);
 
     return (
         <Particles
             id="tsparticles"
             init={particlesInit}
-            loaded={particlesLoaded}
             options={{
                 fpsLimit: 120,
                 interactivity: {
@@ -76,7 +67,7 @@ export const Particle = () => {
                         value: 40,
                     },
                     opacity: {
-                        value: 0.5,
+                        value: 0.1,
                     },
                     shape: {
                         type: "circle",
