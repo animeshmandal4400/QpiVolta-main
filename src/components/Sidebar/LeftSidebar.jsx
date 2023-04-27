@@ -1,16 +1,16 @@
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import { Menu, Sidebar, MenuItem } from "react-pro-sidebar";
 import { useProSidebar } from "react-pro-sidebar";
 import { Link } from "react-router-dom";
 import { tokens } from "../../theme";
-import { useTheme, Box, Typography, IconButton } from "@mui/material";
+import { useTheme, Box, Typography, IconButton, styled } from "@mui/material";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
-import PeopleOutlinedIcon from "@mui/icons-material/PeopleOutlined";
-import ContactsOutlinedIcon from "@mui/icons-material/ContactsOutlined";
-import ReceiptOutlinedIcon from "@mui/icons-material/ReceiptOutlined";
-import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
-import CalendarTodayOutlinedIcon from "@mui/icons-material/CalendarTodayOutlined";
-import HelpOutlineOutlinedIcon from "@mui/icons-material/HelpOutlineOutlined";
+// import PeopleOutlinedIcon from "@mui/icons-material/PeopleOutlined";
+// import ContactsOutlinedIcon from "@mui/icons-material/ContactsOutlined";
+// import ReceiptOutlinedIcon from "@mui/icons-material/ReceiptOutlined";
+// import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
+// import CalendarTodayOutlinedIcon from "@mui/icons-material/CalendarTodayOutlined";
+// import HelpOutlineOutlinedIcon from "@mui/icons-material/HelpOutlineOutlined";
 import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
@@ -20,6 +20,10 @@ import Logo from '../../assets/Logo.png'
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+
+  useEffect(() => {
+    localStorage.setItem('selectedItem', selected);
+  }, [selected]);
 
   return ( 
     <MenuItem
@@ -39,8 +43,16 @@ const Item = ({ title, to, icon, selected, setSelected }) => {
 const MyProSidebar = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-  const [selected, setSelected] = useState("Home");
+  const [selected, setSelected] = useState(localStorage.getItem('selectedItem') || "Home");
   const { collapseSidebar, toggleSidebar, collapsed, broken } = useProSidebar();
+   
+  const CssIconButton = styled(IconButton)({
+    border:"solid transparent",
+    borderRadius:"10px",
+    backgroundColor:`${colors.primary[1000]}`,
+    color:`${colors.grey[500]}`
+  })
+
   return (
     <Box
       sx={{
@@ -76,13 +88,17 @@ const MyProSidebar = () => {
     >
       <Sidebar
         breakPoint="md"
-        backgroundColor={colors.primary[400]}
+        backgroundColor={colors.blueAccent[900]}
+        width="240px"
       >
-        <Menu iconshape="square">
+        <Menu iconshape="square" >
           <MenuItem
             icon={
               collapsed ? (
-                <MenuOutlinedIcon onClick={() => collapseSidebar()} />
+                <CssIconButton onClick={() => collapseSidebar()}>
+                  <MenuOutlinedIcon />
+                </CssIconButton>
+                
               ) :("") 
             }
             style={{
@@ -97,20 +113,20 @@ const MyProSidebar = () => {
                 alignItems="center"
                 ml="15px"
               >
-                <IconButton
+                <CssIconButton
                   onClick={
                     broken ? () => toggleSidebar() : () => collapseSidebar()
                   }
                 >
                   <CloseOutlinedIcon />
-                </IconButton>
+                </CssIconButton>
               </Box>
             )}
           </MenuItem>
           {!collapsed && (
             <Box mb="25px">
               <Box display="flex" justifyContent="center" alignItems="center" >
-                <Link to="/">
+                <Link to="/home">
                 <img
                   alt="profile-user"
                   width="100px"
@@ -127,7 +143,7 @@ const MyProSidebar = () => {
               >
             <Item
               title="Home"
-              to="/"
+              to="/home"
               icon={<HomeOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
@@ -155,11 +171,19 @@ const MyProSidebar = () => {
             />
             <Item
               title="QpiVolta Reax"
-              to="/qpivoltareax"
+              to="/qpiVoltareax"
               icon={<FormatListBulletedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
+            <Item
+              title="QpiVolta Predict"
+              to="/qpiVoltaPredict"
+              icon={<FormatListBulletedIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+
 
             <Typography
               variant="h6"
@@ -176,12 +200,13 @@ const MyProSidebar = () => {
               setSelected={setSelected}
             />
             <Item
-              title="Data2"
-              to="/contacts"
+              title="item"
+              to="/workflows"
               icon={<FormatListBulletedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
+            {/* 
             <Item
               title="Data3"
               to="/invoices"
@@ -190,7 +215,7 @@ const MyProSidebar = () => {
               setSelected={setSelected}
             />
 
-            {/* <Typography
+            <Typography
               variant="h6"
               color={colors.grey[300]}
               sx={{ m: "15px 20px 5px 20px" }}

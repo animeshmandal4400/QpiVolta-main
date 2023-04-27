@@ -57,7 +57,7 @@ const SignUp = () => {
     e.preventDefault()
     try {
       await signUp(email,password, firstName, lastName)
-      navigate('/') 
+      navigate('/home') 
       setError('')
     }
     catch (error) {
@@ -89,6 +89,7 @@ const SignUp = () => {
               <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
               <Person sx={{ color: 'action.active', mr: 1, my: 0.5 }} />
               <CssTextField
+                  required
                   fullWidth
                   label="First Name" 
                   id="FirstName"
@@ -103,6 +104,7 @@ const SignUp = () => {
               <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
               <Person sx={{ color: 'action.active', mr: 1, my: 0.5 }} />
                 <CssTextField
+                  
                   fullWidth
                   id="lastName"
                   label="Last Name"
@@ -170,7 +172,7 @@ const SignUp = () => {
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link href="/Login" variant="body2" sx={{color:"grey"}}>
+                <Link href="/" variant="body2" sx={{color:"grey"}}>
                   Already have an account? Sign in
                 </Link>
               </Grid>

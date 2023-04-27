@@ -27,14 +27,14 @@ const QpiVolta_Force = () => {
         <Header title="Work Flows" subtitle="Welcome to Work Flows"/>
       </Box>
       <Grid maxWidth="100%" container gap={2}>
-        <Grid>
-          <MolCard avatar="A" title="Catalysis" subtitle="Explore inorganic catalyst for variety of appplications" image={img} button="Explore" onClick={handleButtonClick}  />
+        <Grid item>
+          <MolCard id="Catalysis" avatar="A" title="Catalysis" subtitle="Explore inorganic catalyst for variety of appplications" image={img} button="Explore" onClick={handleButtonClick}  />
         </Grid>
-        <Grid>
-          <MolCard avatar="B" title="Solid Electrolytes" subtitle="Explore ion diffussion in solid Electrolytes with Fast Moleculer Dynamics" image={img2} button="Explore" />
+        <Grid item>
+          <MolCard id="Solid_Electrolytes" avatar="B" title="Solid Electrolytes" subtitle="Explore ion diffussion in solid Electrolytes with Fast Moleculer Dynamics" image={img2} button="Explore" />
         </Grid>
-        <Grid>
-          <MolCard avatar="C" title="Additive Manufacturing" subtitle="Optimize advance ink formulations for additive Manufacturing" image={img3} button="Explore"/>
+        <Grid item>
+          <MolCard id="Additive_Manufacturing" avatar="C" title="Additive Manufacturing" subtitle="Optimize advance ink formulations for additive Manufacturing" image={img3} button="Explore"/>
         </Grid>
       </Grid>
       <Button variant='contained' color='secondary' sx={{margin:"20px 2px"}}>Build New Workflow</Button>

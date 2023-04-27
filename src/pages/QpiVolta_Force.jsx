@@ -1,4 +1,4 @@
-import { Typography, useTheme, Box, useMediaQuery, Grid } from '@mui/material'
+import { useTheme, Box, useMediaQuery, Grid } from '@mui/material'
 import React from 'react'
 import MolCard from '../components/MolCard';
 import Header from '../components/Header';
@@ -19,10 +19,10 @@ const QpiVolta_Force = () => {
       </Box>
       <Grid maxWidth="100%" container gap={2}>
         <Grid>
-          <MolCard avatar="A" title="Neural Network" subtitle="Accelerate Density Functional Theory Calculations with Neural Network" button="Launch"  />
+          <MolCard id="neural_network" avatar="A" title="Neural Network" subtitle="Accelerate Density Functional Theory Calculations with Neural Network" button="Launch"  />
         </Grid>
         <Grid>
-          <MolCard avatar="B" title="Hybrid Neural Network MD" subtitle="Hybrid workflow for accelerating Molecular Dynamics" button="Launch" />
+          <MolCard id="Hybrid_Neural_Network_MD" avatar="B" title="Hybrid Neural Network MD" subtitle="Hybrid workflow for accelerating Molecular Dynamics" button="Launch" />
         </Grid>
       </Grid>
     </Box>

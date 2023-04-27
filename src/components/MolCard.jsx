@@ -13,10 +13,31 @@ import ShareIcon from '@mui/icons-material/Share';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { Button, useTheme } from '@mui/material'
 import { tokens } from '../theme';
+import { useDispatch } from "react-redux";
+import { addComponent } from "../Redux/reducer/actions/recentViewedActions";
+import { useNavigate } from 'react-router-dom';
 
-const GenCard = (props) => {
+const MolCard = (props) => {
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
+
+    const dispatch = useDispatch();
+    const navigate = useNavigate()
+    const handleLaunchClick = () => {
+      dispatch(
+        addComponent({
+          id: props.id,
+          title: props.title,
+          subtitle: props.subtitle,
+          avatar: props.avatar,
+          button: props.button,
+          image: props.image,
+        })
+      );
+      if (props.onClick) {
+        props.onClick();
+      }
+    };
   return (
     <Card sx={{ maxWidth: 350,backgroundColor:`${colors.blueAccent[900]}` }} style={{borderRadius:"10px"}} >
       <CardHeader
@@ -42,9 +63,8 @@ const GenCard = (props) => {
         />
       )}
       <CardContent>
-        {/* <Chip variant="outlined" label="Orgnic LED"/> */}
         <Button 
-        onClick={props.onClick}
+          onClick={handleLaunchClick}
           variant="contained" 
           style={{backgroundColor:`${colors.pinkAccent[500]}`}} 
         >
@@ -58,10 +78,9 @@ const GenCard = (props) => {
         <IconButton aria-label="share">
           <ShareIcon />
         </IconButton>
-        
       </CardActions>
     </Card>
   )
 }
 
-export default GenCard
+export default MolCard

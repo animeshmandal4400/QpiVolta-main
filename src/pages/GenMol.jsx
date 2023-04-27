@@ -2,7 +2,8 @@ import { useTheme, Box, useMediaQuery, Grid, Typography, Stack, Slider, Button  
 import React from 'react'
 import Header from '../components/Header';
 import { tokens } from '../theme';
-import Molecule from '../components/Molecule';
+import Molecule from '../components/pdbMolecule';
+import { Resizable } from 're-resizable';
 
 const GenMol = () => {
     const theme = useTheme();
@@ -21,6 +22,7 @@ const GenMol = () => {
       ];
 
       const model = localStorage.getItem("model");
+      
   return (
     <Box p="20px" >
       <Box display={smScreen ? "flex" : "block"}
@@ -37,15 +39,21 @@ const GenMol = () => {
         HOMO-LUMO gap (ev)
       </Typography>
       <Slider sx={{width:"95%"}} color="secondary" defaultValue={50} aria-label="Default" valueLabelDisplay="auto" marks={marks}/>
-      </Stack>
       <Button variant="outlined" color="secondary">
         Generate
       </Button>
+      </Stack>
       </Grid>
       <Grid item  xs={12} md={7}>
-      {model && <Molecule model={model} />}
+        <Resizable defaultSize={{
+                  width: 320,
+                  height: 300,
+        }}>
+          {model && <Molecule modelpdb={model} />}
+          </Resizable>
       </Grid>
       </Grid>
+      
     </Box>
   )
 }

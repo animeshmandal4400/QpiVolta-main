@@ -57,8 +57,7 @@ const Login = () => {
     setError('')
     try {
       await logIn( email,password )
-      alert("Login Successfully")
-      navigate('/')
+      navigate('/home')
     }
     catch(error) {
       console.log(error);

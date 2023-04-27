@@ -1,6 +1,6 @@
 import React from 'react'
 
-const catalyst = () => {
+const Catalyst = () => {
   return (
     <div>
       <p>Hiiii</p>
@@ -8,4 +8,4 @@ const catalyst = () => {
   )
 }
 
-export default catalyst
+export default Catalyst

@@ -14,9 +14,12 @@ import { AuthContextProvider } from "./context/AuthContext";
 import GenMol from "./pages/GenMol";
 import Workflows from "./pages/Workflows";
 import CatDiscover from "./pages/CatDiscover";
-
+import Molecule from "./components/cifMolecule";
+import QpiVolta_predict from "./pages/QpiVolta_Predict";
+import Visualization from "./pages/Visualization";
 
 const App = () => {
+  
   const [isSidebar, setIsSidebar] = useState(true);
 
   const [theme, colorMode] = useMode();
@@ -27,7 +30,7 @@ const App = () => {
         <AuthContextProvider>
         <Routes>
           <Route path="/signup" element={<SignUp />} />
-          <Route path="/login" element={<Login />} />
+          <Route exact path="/" element={<Login />} />
           <Route
             element={
               <MyProSidebarProvider>
@@ -38,11 +41,14 @@ const App = () => {
               </MyProSidebarProvider>
             }
           >
-            <Route path="/" element={<Home />} />
-            <Route path="/qpiVoltaGen" element={<QpiVolta_Gen />} />
+            <Route path="/home" element={<Home/>} />
+            <Route path="/qpiVoltaGen" element={<QpiVolta_Gen/>} />
             <Route path="/genMol" element={<GenMol/>} />
             <Route path="/qpiVoltaForce" element={<QpiVolta_Force/>} />
-            <Route path="/qpivoltaReax" element={<QpiVolta_reax/>} />
+            <Route path="/qpiVoltaReax" element={<QpiVolta_reax/>} />
+            <Route path="/cifMolecule" element={<Molecule/>} />
+            <Route path="/qpiVoltaPredict" element={<QpiVolta_predict/>} />
+            <Route path="/qpiVoltaPredict/visualization" element={<Visualization/>} />
             <Route path="/workFlows" element={<Workflows/>} />
             <Route path="/catDiscovery" element={<CatDiscover/>} />
           </Route>

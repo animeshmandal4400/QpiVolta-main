@@ -10,6 +10,9 @@ import { useProSidebar } from "react-pro-sidebar";
 import { UserAuth } from "../../context/AuthContext";
 import {  useNavigate } from "react-router-dom";
 import RightSidebar from '../Sidebar/RightSidebar';
+import { styled } from "@mui/system";
+import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
+import Breadcrumb from "../Sidebar/BreadCrumbs";
 
 const Topbar = () => {
   const theme = useTheme();
@@ -25,7 +28,7 @@ const Topbar = () => {
     setIsNotificationOpen(true);
   };
 
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [anchorEl, setAnchorEl] = useState(null);
   function handleClick(event) {
     if (anchorEl !== event.currentTarget) {
       setAnchorEl(event.currentTarget);
@@ -38,38 +41,46 @@ const Topbar = () => {
   const handleLogout = async() => {
     try {
       await logOut();
-      navigate('/login');
+      navigate('/');
     }catch(error){
       alert(error)
     }
   }
+    
+  const CssIconButton = styled(IconButton)({
+    border:"solid transparent",
+    borderRadius:"10px",
+    backgroundColor:`${colors.primary[1000]}`,
+    color:`${colors.grey[500]}`
+  })
 
   return (
-    <Box display="flex" zIndex="1" justifyContent="space-between" p={2} backgroundColor={colors.blueAccent[900]} >
+    <Box sx={{display:"flex", zIndex:"9999", justifyContent:"space-between", padding:"15px", backgroundColor:`${colors.blueAccent[900]}`}}  >
       <Box display="flex">
         {broken && (
-          <IconButton
+          <CssIconButton
             sx={{ margin: "0 6 0 2" }}
             onClick={() => toggleSidebar()}
           >
             <MenuOutlinedIcon />
-          </IconButton>
-        )}
-        
+          </CssIconButton>
+        )}  
       </Box>
-      <Box display="flex">
-        <IconButton onClick={colorMode.toggleColorMode}>
+      <Box display="flex" marginLeft="5px" justifyContent="space-between" alignItems="center" width="100%">
+        <Breadcrumb/>
+        <Box display="flex" gap="8px">
+            <CssIconButton onClick={colorMode.toggleColorMode} >
 
           {theme.palette.mode === "dark" ? (
            <LightModeOutlinedIcon />
           ) : (
             <DarkModeOutlinedIcon />
           )}
-        </IconButton>
+        </CssIconButton>
 
-        <IconButton onClick={handleNotificationClick}>
-        <NotificationsNoneOutlinedIcon />
-      </IconButton>
+        <CssIconButton onClick={handleNotificationClick}>
+        <NotificationsNoneOutlinedIcon/>
+      </CssIconButton>
       
        <RightSidebar isOpen={isNotificationOpen} toggle={setIsNotificationOpen} />
         <span
@@ -79,8 +90,10 @@ const Topbar = () => {
         onMouseOver={handleClick}
       >
         
-        <IconButton>
-          <AccountCircleRoundedIcon />
+        <IconButton sx={{border:" solid transparent",
+                        backgroundColor:`${colors.primary[1000]}`,
+                        color:`${colors.grey[500]}`}}>
+          <PersonOutlineOutlinedIcon />
         </IconButton>
       </span>
       <Menu
@@ -96,6 +109,8 @@ const Topbar = () => {
         <MenuItem onClick={handleLogout}> LogIn</MenuItem>
         }        
       </Menu>
+        </Box>
+        
       </Box>
     </Box>
   );

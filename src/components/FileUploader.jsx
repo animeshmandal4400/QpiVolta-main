@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 const FileUploader =() => {
   const [selectedFile, setSelectedFile] = useState(null);
-  const history = useNavigate();
+  const navigate = useNavigate();
 
   function handleDrop(acceptedFiles) {
     setSelectedFile(acceptedFiles[0]);
@@ -19,11 +19,11 @@ const FileUploader =() => {
       reader.onload = function(e) {
         const fileContent = e.target.result;
         localStorage.setItem("model", fileContent);
-        history("/Genmol");
+        navigate("/Genmol");
       }
     }
   }
-
+  
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop:handleDrop });
 
   return (
@@ -41,9 +41,11 @@ const FileUploader =() => {
         >
           <input {...getInputProps()} />
           {selectedFile ? (
-            <div>
-              <p>Selected file:</p>
-              <p>{selectedFile.name}</p>
+            <div
+            style={{width:"250px"}}
+            >
+              <p>Selected file:  {selectedFile.name}</p>
+              
             </div>
           ) : (
             <p>Drag and drop a file here, or click to select a file</p>

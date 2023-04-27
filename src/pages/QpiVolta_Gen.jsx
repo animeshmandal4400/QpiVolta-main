@@ -4,7 +4,6 @@ import Header from '../components/Header';
 import { tokens } from '../theme';
 import MolCard from "../components/MolCard"
 import FileUploader from '../components/FileUploader';
-import Molecule from '../components/Molecule';
 import { useNavigate } from 'react-router-dom';
 import img from "../assets/molucule.png"
 
@@ -28,10 +27,17 @@ const QpiVolta_Gen = () => {
       </Box>
       <Grid container gap={2} >
         <Grid>
-          <MolCard avatar="A" title="QM9 Dataset" subtitle="A comprehensive chemical space of small organic molecules"  button="Generate" image={img} onClick={handleButtonClick} />
+          <MolCard 
+          id="QM9_Dataset" 
+          avatar="A" 
+          title="QM9 Dataset" 
+          subtitle="A comprehensive chemical space of small organic molecules"  
+          button="Generate" 
+          image={img} 
+          onClick= {handleButtonClick} />
         </Grid>
         <Grid >
-          <MolCard avatar="B" title="QMugs" subtitle="Comprises quantam mechanical proparties of phermacologically relevant molecules" image={img}  button="Generate" onClick={handleButtonClick}/>
+          <MolCard id="QMugs" avatar="B" title="QMugs" subtitle="Comprises quantam mechanical proparties of phermacologically relevant molecules" image={img}  button="Generate" onClick={handleButtonClick}/>
         </Grid>
       </Grid>
       <Grid container width="max-content" item xs={12} md={6} margin="20px 2px">

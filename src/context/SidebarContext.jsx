@@ -18,6 +18,7 @@ export const MyProSidebarProvider = ({ children }) => {
           <RightSidebar/>
           {children}
         </div>
+      {/* </SidebarContext.Provider> */}
     </ProSidebarProvider>
   );
 };
